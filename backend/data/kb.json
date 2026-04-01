@@ -1,0 +1,109 @@
+{
+  "categories": [
+    {
+      "id": "wifi",
+      "title": "WiFi / Network Issues",
+      "keywords": ["wifi", "internet", "network", "connected", "connection", "no internet", "slow internet"],
+      "steps": [
+        "Check if the WiFi indicator light on your router is on and stable.",
+        "Toggle WiFi off and on from your device settings.",
+        "Forget the network and reconnect — go to WiFi settings, select the network, and choose 'Forget'.",
+        "Restart your device completely.",
+        "If on a laptop, try connecting via ethernet cable to rule out a WiFi adapter issue.",
+        "Check if other devices on the same network have internet — this tells us if it's device-specific or network-wide."
+      ],
+      "escalate_after_steps": true,
+      "ticket_reason": "Network issue persists after standard troubleshooting steps"
+    },
+    {
+      "id": "vpn",
+      "title": "VPN Not Connecting",
+      "keywords": ["vpn", "remote access", "cisco", "anyconnect", "pulse", "zscaler", "tunnel"],
+      "steps": [
+        "Confirm you have an active internet connection before launching VPN.",
+        "Close the VPN client completely and reopen it.",
+        "Check that you're using the correct VPN server address provided by IT.",
+        "Ensure your credentials (username/password) are up to date — your AD password may have changed.",
+        "Temporarily disable your antivirus or firewall and try connecting again.",
+        "Uninstall and reinstall the VPN client if the issue persists."
+      ],
+      "escalate_after_steps": true,
+      "ticket_reason": "VPN connection failure after credential and client checks"
+    },
+    {
+      "id": "password_reset",
+      "title": "Password Reset / Account Locked",
+      "keywords": ["password", "locked", "account", "reset", "forgot password", "can't login", "login failed"],
+      "steps": [
+        "Go to the self-service password reset portal at reset.company.com.",
+        "Enter your employee ID and registered email address.",
+        "Check your personal email for a reset link — it may take 2-3 minutes.",
+        "If your account is locked, wait 15 minutes and try again — accounts auto-unlock after failed attempts.",
+        "Make sure Caps Lock is off when entering your new password.",
+        "If you cannot access the reset portal, IT will need to verify your identity manually."
+      ],
+      "escalate_after_steps": true,
+      "ticket_reason": "Account locked or password reset portal inaccessible"
+    },
+    {
+      "id": "laptop_not_booting",
+      "title": "Laptop Not Starting / Black Screen",
+      "keywords": ["black screen", "not booting", "won't start", "dead", "no display", "stuck", "freezing", "frozen"],
+      "steps": [
+        "Hold the power button for 10 seconds to force a shutdown, then press it once to restart.",
+        "Check if the charging light is on — if not, try a different charger or power outlet.",
+        "Connect an external monitor to see if the display itself is the issue.",
+        "Try booting in Safe Mode — press F8 repeatedly during startup (Windows) or hold Shift during restart (Mac).",
+        "Remove any external USB drives or docking stations and try booting again.",
+        "If you see a spinning wheel or loading screen for more than 10 minutes, the OS may be corrupted."
+      ],
+      "escalate_after_steps": true,
+      "ticket_reason": "Device fails to boot after power cycle and safe mode attempts"
+    },
+    {
+      "id": "printer",
+      "title": "Printer Not Working",
+      "keywords": ["printer", "print", "printing", "not printing", "paper jam", "printer offline"],
+      "steps": [
+        "Check if the printer shows as 'Offline' in your device list — right-click and select 'Use Printer Online'.",
+        "Cancel all pending print jobs from the print queue.",
+        "Turn the printer off, wait 30 seconds, and turn it back on.",
+        "Remove and re-add the printer from your system settings.",
+        "Check for paper jams by opening all printer trays and doors.",
+        "Make sure the printer and your device are on the same network."
+      ],
+      "escalate_after_steps": true,
+      "ticket_reason": "Printer remains unresponsive after queue clear and reconnection"
+    },
+    {
+      "id": "email",
+      "title": "Email / Outlook Issues",
+      "keywords": ["email", "outlook", "mail", "not syncing", "can't send", "inbox", "exchange"],
+      "steps": [
+        "Check your internet connection first — Outlook requires connectivity to sync.",
+        "Look at the bottom status bar in Outlook — it should say 'Connected to Microsoft Exchange'.",
+        "Click Send/Receive All Folders (F9) to force a sync.",
+        "Close and reopen Outlook.",
+        "Clear the Outlook cache — go to File > Account Settings > Data Files > Open File Location, then delete the .ost file and restart Outlook.",
+        "If emails are stuck in Outbox, check attachment size — files over 25MB are typically blocked."
+      ],
+      "escalate_after_steps": true,
+      "ticket_reason": "Outlook sync failure or persistent send/receive errors"
+    },
+    {
+      "id": "software_install",
+      "title": "Software Installation / Access Request",
+      "keywords": ["install", "software", "application", "access", "permission", "download", "license"],
+      "steps": [
+        "Check if the software is available in the Company Software Portal (Self Service / Software Center).",
+        "Ensure you have admin rights — most installations require IT-elevated permissions.",
+        "If it's a licensed tool, confirm with your manager that a license has been approved for you.",
+        "Try running the installer as Administrator (right-click → Run as Administrator).",
+        "Disable antivirus temporarily during installation if it's being blocked.",
+        "If access to a system is needed, your manager must submit an access request form."
+      ],
+      "escalate_after_steps": true,
+      "ticket_reason": "Software installation blocked or license approval required"
+    }
+  ]
+}
