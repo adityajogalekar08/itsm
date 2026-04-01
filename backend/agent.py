@@ -1,12 +1,12 @@
 import json
 import os
-from openai import OpenAI
+from groq import Groq
 from dotenv import load_dotenv
 from kb import search_kb
 from ticket import create_ticket
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 tools = [
     {
@@ -59,24 +59,27 @@ tools = [
 ]
 
 SYSTEM_PROMPT = """
-You are Alex, an IT Service Desk Agent for a large enterprise company. 
+You are Alex, an IT Service Desk Agent for a large enterprise company.
 You are professional, calm, friendly, and efficient.
 
-Your job is to:
-1. Understand the user's IT problem clearly — ask clarifying questions if the problem is vague
-2. Search the knowledge base and walk the user through troubleshooting steps ONE AT A TIME
-   - Do not dump all steps at once
-   - After each step, ask the user if it worked before moving to the next
-3. If the issue is resolved, confirm and close warmly
-4. If all steps are exhausted and the issue persists, create a support ticket
-5. Handle multiple issues in one message — address each one clearly
+CRITICAL RULES - YOU MUST FOLLOW THESE:
+- You MUST call search_kb tool EVERY TIME the user describes a technical issue
+- You MUST ONLY use troubleshooting steps returned by the search_kb tool
+- You MUST NEVER generate troubleshooting steps from your own knowledge
+- If search_kb returns no results, say you'll escalate and call create_ticket immediately
+- NEVER skip calling search_kb for any technical problem
 
-Important rules:
-- Never give generic advice — always use the knowledge base
-- Never create a ticket without trying at least 2-3 troubleshooting steps first
+Your workflow:
+1. Ask clarifying questions if the problem is vague
+2. Call search_kb with the user's problem
+3. Walk through the steps from search_kb ONE AT A TIME
+   - After each step, ask the user if it worked before moving to the next
+4. If all KB steps are exhausted and issue persists, call create_ticket
+5. If the issue is resolved, confirm and close warmly
+
+Ticket rules:
+- Never create a ticket without trying at least 2-3 steps from the KB first
 - Always maintain context of what steps have already been tried
-- Be empathetic — users are often frustrated when things don't work
-- Keep responses concise and structured
 - If the user is completely blocked from working, mark priority as high
 """
 
@@ -85,10 +88,11 @@ def run_agent(conversation_history):
 
     while True:
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="openai/gpt-oss-120b",
             messages=messages,
             tools=tools,
-            tool_choice="auto"
+            tool_choice="auto",
+            max_tokens=1024
         )
 
         response_message = response.choices[0].message
@@ -100,8 +104,13 @@ def run_agent(conversation_history):
                 "ticket": None
             }
 
-        # Handle tool calls
-        messages.append(response_message)
+        # Append assistant message with tool calls
+        messages.append({
+    "role": "assistant",
+    "content": response_message.content or "",
+    "tool_calls": response_message.tool_calls
+})
+
         ticket_data = None
 
         for tool_call in response_message.tool_calls:
@@ -123,18 +132,17 @@ def run_agent(conversation_history):
                 tool_result = json.dumps(result)
 
             messages.append({
-                "role": "tool",
-                "tool_call_id": tool_call.id,
-                "content": tool_result
-            })
+    "role": "assistant",
+    "content": response_message.content or "",
+    "tool_calls": response_message.tool_calls
+})
 
-        # If ticket was created, get final message then return with ticket
+        # If ticket was created, get final closing message
         if ticket_data:
             final_response = client.chat.completions.create(
-                model="gpt-4o",
+                model="openai/gpt-oss-120b",
                 messages=messages,
-                tools=tools,
-                tool_choice="none"
+                max_tokens=1024
             )
             return {
                 "message": final_response.choices[0].message.content,
