@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from agent import run_agent
-
+from voice_routes import voice_bp
 app = Flask(__name__)
 CORS(app)
-
+app.register_blueprint(voice_bp)
 conversation_store = {}
 
 @app.route("/chat", methods=["POST"])

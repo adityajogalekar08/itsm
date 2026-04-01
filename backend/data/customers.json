@@ -1,0 +1,116 @@
+{
+  "customers": [
+    {
+      "customer_id": "CUST-001",
+      "name": "Rahul Sharma",
+      "phone": "+91-9876543210",
+      "email": "rahul.sharma@email.com",
+      "vehicles": [
+        {
+          "vehicle_id": "VH-001",
+          "make": "Maruti Suzuki",
+          "model": "Swift",
+          "year": 2021,
+          "registration": "KA-01-AB-1234",
+          "last_service_date": "2025-06-15",
+          "next_service_due": "2025-12-15",
+          "service_due_km": 10000,
+          "current_km": 9800,
+          "pending_services": ["Oil Change", "Brake Inspection", "Air Filter Replacement"]
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-002",
+      "name": "Priya Patel",
+      "phone": "+91-9845012345",
+      "email": "priya.patel@email.com",
+      "vehicles": [
+        {
+          "vehicle_id": "VH-002",
+          "make": "Hyundai",
+          "model": "Creta",
+          "year": 2022,
+          "registration": "MH-02-CD-5678",
+          "last_service_date": "2025-05-20",
+          "next_service_due": "2025-11-20",
+          "service_due_km": 15000,
+          "current_km": 14500,
+          "pending_services": ["Full Service", "Tyre Rotation", "AC Filter Cleaning"]
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-003",
+      "name": "Amit Kumar",
+      "phone": "+91-9901234567",
+      "email": "amit.kumar@email.com",
+      "vehicles": [
+        {
+          "vehicle_id": "VH-003",
+          "make": "Tata",
+          "model": "Nexon",
+          "year": 2023,
+          "registration": "DL-03-EF-9012",
+          "last_service_date": "2025-07-10",
+          "next_service_due": "2026-01-10",
+          "service_due_km": 20000,
+          "current_km": 19200,
+          "pending_services": ["Oil Change", "Wheel Alignment", "Battery Check"]
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-004",
+      "name": "Sneha Reddy",
+      "phone": "+91-9123456789",
+      "email": "sneha.reddy@email.com",
+      "vehicles": [
+        {
+          "vehicle_id": "VH-004",
+          "make": "Honda",
+          "model": "City",
+          "year": 2020,
+          "registration": "TS-04-GH-3456",
+          "last_service_date": "2025-04-05",
+          "next_service_due": "2025-10-05",
+          "service_due_km": 12000,
+          "current_km": 11800,
+          "pending_services": ["Full Service", "Brake Pad Replacement", "Coolant Top-up"]
+        }
+      ]
+    }
+  ],
+  "service_center": {
+    "name": "AutoCare Service Center",
+    "locations": [
+      {
+        "id": "SC-001",
+        "area": "Koramangala",
+        "city": "Bengaluru",
+        "address": "123, 5th Block, Koramangala, Bengaluru - 560095",
+        "phone": "+91-80-12345678",
+        "working_hours": "Mon-Sat: 8AM - 7PM",
+        "available_slots": ["9:00 AM", "11:00 AM", "2:00 PM", "4:00 PM"]
+      },
+      {
+        "id": "SC-002",
+        "area": "Whitefield",
+        "city": "Bengaluru",
+        "address": "456, ITPL Main Road, Whitefield, Bengaluru - 560066",
+        "phone": "+91-80-87654321",
+        "working_hours": "Mon-Sat: 8AM - 7PM",
+        "available_slots": ["10:00 AM", "12:00 PM", "3:00 PM", "5:00 PM"]
+      },
+      {
+        "id": "SC-003",
+        "area": "HSR Layout",
+        "city": "Bengaluru",
+        "address": "789, Sector 2, HSR Layout, Bengaluru - 560102",
+        "phone": "+91-80-11223344",
+        "working_hours": "Mon-Sat: 8AM - 7PM",
+        "available_slots": ["9:30 AM", "11:30 AM", "2:30 PM", "4:30 PM"]
+      }
+    ]
+  }
+}
